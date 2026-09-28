@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartScribe — AI Text Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🤖</div>
+      <div class="logo-name">Smart<em>Scribe</em><span class="logo-badge">AI</span></div>
+    </div>
+    <p>Your intelligent text assistant — Summarize, Translate & Chat</p>
+  </header>
+
+  <div class="wrapper">
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('summarize', this)">📝 Summarize</button>
+      <button class="tab" onclick="switchTab('translate', this)">🌐 Translate</button>
+      <button class="tab" onclick="switchTab('chat', this)">💬 Chat</button>
+    </div>
+
+    <!-- SUMMARIZER CARD -->
+    <div class="card active" id="tab-summarize">
+      <div class="card-title">Text Summarizer</div>
+      <div class="card-subtitle">Paste any long text and get a clear concise summary instantly</div>
+
+      <label class="field-label">Your Text</label>
+      <textarea id="summarizeInput" placeholder="Paste your long text here — articles, essays, notes, anything..."></textarea>
+
+      <label class="field-label">Summary Length</label>
+      <select id="summaryLength">
+        <option value="short">Short — 2 to 3 sentences</option>
+        <option value="medium" selected>Medium — 1 paragraph</option>
+        <option value="detailed">Detailed — key points breakdown</option>
+      </select>
+
+      <button class="btn btn-primary" id="summarizeBtn" onclick="summarizeText()">
+        Summarize Text
+      </button>
+
+      <div class="loading" id="summarizeLoading">
+        <div class="spinner"></div>
+        AI is reading and summarizing your text...
+      </div>
+
+      <div class="output-box" id="summarizeOutput">
+        <div class="output-label">
+          Summary
+          <button class="copy-btn" onclick="copyOutput('summarizeResult')">Copy</button>
+        </div>
+        <div class="output-text" id="summarizeResult"></div>
+      </div>
+    </div>
+
+    <!-- TRANSLATOR CARD -->
+    <div class="card" id="tab-translate">
+      <div class="card-title">Text Translator</div>
+      <div class="card-subtitle">Translate any text into your chosen language instantly</div>
+
+      <label class="field-label">Text to Translate</label>
+      <textarea id="translateInput" placeholder="Type or paste the text you want to translate..."></textarea>
+
+      <label class="field-label">Translate To</label>
+      <select id="targetLang">
+        <option value="Hindi">Hindi</option>
+        <option value="Marathi">Marathi</option>
+        <option value="Spanish">Spanish</option>
+        <option value="French">French</option>
+        <option value="German">German</option>
+        <option value="Japanese">Japanese</option>
+        <option value="Chinese">Chinese</option>
+        <option value="Arabic">Arabic</option>
+        <option value="Portuguese">Portuguese</option>
+        <option value="Russian">Russian</option>
+        <option value="Korean">Korean</option>
+        <option value="Italian">Italian</option>
+      </select>
+
+      <button class="btn btn-primary" id="translateBtn" onclick="translateText()">
+        Translate Text
+      </button>
+
+      <div class="loading" id="translateLoading">
+        <div class="spinner"></div>
+        AI is translating your text...
+      </div>
+
+      <div class="output-box" id="translateOutput">
+        <div class="output-label">
+          Translation
+          <button class="copy-btn" onclick="copyOutput('translateResult')">Copy</button>
+        </div>
+        <div class="output-text" id="translateResult"></div>
+      </div>
+    </div>
+
+    <!-- CHATBOT CARD -->
+    <div class="card" id="tab-chat">
+      <div class="card-title">AI Chatbot</div>
+      <div class="card-subtitle">Ask me anything — I'm here to help!</div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-empty" id="chatEmpty">
+          👋 Hey! Ask me anything.<br/>I'm your AI assistant!
+        </div>
+      </div>
+
+      <div class="chat-input-row">
+        <input type="text" class="chat-input" id="chatInput"
+          placeholder="Type your message..."
+          onkeydown="if(event.key==='Enter') sendChat()"/>
+        <button class="chat-send" id="chatSendBtn" onclick="sendChat()">Send</button>
+      </div>
+    </div>
+
+    <footer>Built with ❤️ by <span>Onkar Shelke</span> · SmartScribe AI v1.0</footer>
+
+  </div>
+
+  <div class="toast" id="toast">Copied!</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
